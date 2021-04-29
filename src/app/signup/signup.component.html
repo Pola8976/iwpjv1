@@ -1,0 +1,66 @@
+<h3>Welcome to Primorye</h3>
+
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <label>
+        Name:
+        <input type="text" formControlName="name">
+    </label>
+    <div formGroupName="passwords">
+        <label>
+            Password:
+            <input type="password" formControlName="password">
+        </label>
+        <label>
+            Re-enter Password:
+            <input type="password" formControlName="reenter">
+        </label>
+    </div>
+    <label>
+        Phone:
+        <input type="text" formControlName="phone">
+    </label>
+    <label>
+        Email:
+        <input type="email" formControlName="email">
+    </label>
+    <label>
+        Sex:
+        <input type="radio" formControlName="sex" value="m">
+        Male
+        <input type="radio" formControlName="sex" value="f">
+        Female
+        <input type="radio" formControlName="sex" value="o">
+        Other
+    </label>
+    <div formGroupName="address">
+        <h4>Address</h4>
+        <label>
+            House:
+            <input type="text" formControlName="house">
+        </label>
+        <label>
+            Area:
+            <input type="text" formControlName="area">
+        </label>
+        <label>
+            Landmark:
+            <input type="text" formControlName="landmark">
+        </label>
+        <label>
+            City:
+            <input type="text" formControlName="city">
+        </label>
+        <label>
+            State:
+            <input type="text" formControlName="state">
+        </label>
+        <label>
+            Pin:
+            <input type="text" formControlName="pin">
+        </label>
+    </div>
+    <button value="submit" [disabled]="!signupForm.valid">Submit</button>
+</form>
+
+<p>Form Value: {{ signupForm.value | json }}</p>
+<p>Form Status: {{ signupForm.status }}</p>
