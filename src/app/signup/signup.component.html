@@ -3,12 +3,12 @@
 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
     <label>
         Name:
-        <input type="text" formControlName="name">
+        <input type="text" formControlName="fullName">
     </label>
     <div formGroupName="passwords">
         <label>
             Password:
-            <input type="password" formControlName="password">
+            <input type="password" formControlName="pass">
         </label>
         <label>
             Re-enter Password:
@@ -22,6 +22,10 @@
     <label>
         Email:
         <input type="email" formControlName="email">
+    </label>
+    <label>
+        Age:
+        <input type="number" formControlName="age">
     </label>
     <label>
         Sex:
@@ -64,3 +68,17 @@
 
 <p>Form Value: {{ signupForm.value | json }}</p>
 <p>Form Status: {{ signupForm.status }}</p>
+
+<p>{{ signupForm.get('fullName').invalid }}</p>
+<p>{{ signupForm.get(['passwords', 'pass']).invalid }}</p>
+<p>{{ signupForm.get(['passwords', 'reenter']).invalid }}</p>
+<p>{{ signupForm.get('phone').invalid }}</p>
+<p>{{ signupForm.get('age').invalid }}</p>
+<p>{{ signupForm.get('email').invalid }}</p>
+<p>{{ signupForm.get('sex').invalid }}</p>
+<p>{{ signupForm.get(['address', 'house']).invalid }}</p>
+<p>{{ signupForm.get(['address', 'area']).invalid }}</p>
+<p>{{ signupForm.get(['address', 'landmark']).invalid }}</p>
+<p>{{ signupForm.get(['address', 'city']).invalid }}</p>
+<p>{{ signupForm.get(['address', 'state']).invalid }}</p>
+<p>{{ signupForm.get(['address', 'pin']).invalid }}</p>

@@ -16,11 +16,11 @@ var conn = mysql.createConnection({
   });
 
 router.get('/test', (req, res, next) => {
-    conn.query('SELECT 1+2 AS solution FROM DUAL', function (err, rows, fields) {
+    conn.query('SELECT id, someattri FROM test', function (err, rows, fields) {
         if (err)
             res.json(err);
         else
-            res.json(rows[0]);
+            res.json(rows);
       });
 });
 
