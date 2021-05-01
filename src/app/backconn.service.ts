@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { templateJitUrl } from '@angular/compiler';
+import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,13 @@ export class BackconnService {
     private http: HttpClient,
   ) { }
 
-  getTest() {
+  getTest(): Observable<any> {
     return this.http.get(this.rootUrl + '/test');
+  }
+  
+  headers = new HttpHeaders({'Content-Type':  'application/json'});
+
+  postNewCustomer(reqBody: string): Observable<any> {
+    return this.http.post(this.rootUrl + '/new-customer', reqBody, {headers: this.headers});
   }
 }

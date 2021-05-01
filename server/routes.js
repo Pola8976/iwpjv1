@@ -24,4 +24,16 @@ router.get('/test', (req, res, next) => {
       });
 });
 
+router.post('/new-customer', (req, res, next) => {
+    console.log(req.body)
+    /* sql = 'INSERT INTO dupliCustomers (passhash, phone, email, age, sex, house, area, landmark, city, state, pin) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
+    conn.query(sql, res.body.fields, function (err, result) {
+      if (err)
+          res.json(err);
+      else
+          res.json(result);
+    });
+    */
+}); 
+
 module.exports = router;
