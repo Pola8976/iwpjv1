@@ -3,64 +3,67 @@
 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
     <label>
         Name:
-        <input type="text" formControlName="fullName">
+        <input type="text" name="fullName" formControlName="fullName">
     </label>
     <div formGroupName="passwords">
         <label>
             Password:
-            <input type="password" formControlName="pass">
+            <input type="password" name="pass" formControlName="pass">
         </label>
         <label>
             Re-enter Password:
-            <input type="password" formControlName="reenter">
+            <input type="password" name="reenter" formControlName="reenter">
         </label>
     </div>
     <label>
         Phone:
-        <input type="text" formControlName="phone">
+        <input type="text" name="phone" formControlName="phone">
     </label>
     <label>
         Email:
-        <input type="email" formControlName="email">
+        <input type="email" name="email" formControlName="email">
     </label>
+    <div class="alert alert-warning">
+        <span *ngIf="signupForm.get('email').invalid">Incorrect Format</span>
+    </div>
     <label>
         Age:
-        <input type="number" formControlName="age">
+        <input type="number" name="age" formControlName="age">
     </label>
     <label>
         Sex:
-        <input type="radio" formControlName="sex" value="m">
+        <input type="radio" name="sex" formControlName="sex" value="m">
         Male
-        <input type="radio" formControlName="sex" value="f">
+        <input type="radio" name="sex" formControlName="sex" value="f">
         Female
-        <input type="radio" formControlName="sex" value="o">
+        <input type="radio" name="sex" formControlName="sex" value="o">
         Other
     </label>
     <div formGroupName="address">
         <h4>Address</h4>
         <label>
             House:
-            <input type="text" formControlName="house">
+            <input type="text" name="house" formControlName="house">
         </label>
         <label>
             Area:
-            <input type="text" formControlName="area">
+            <input type="text" name="area" formControlName="area">
         </label>
         <label>
             Landmark:
-            <input type="text" formControlName="landmark">
+            <input type="text" name="landmark" formControlName="landmark">
         </label>
         <label>
             City:
-            <input type="text" formControlName="city">
+            <input type="text" name="city" formControlName="city">
         </label>
         <label>
             State:
-            <input type="text" formControlName="state">
+            <input type="text" name="state" formControlName="state">
         </label>
         <label>
             Pin:
-            <input type="text" formControlName="pin">
+            <input type="text" name="pin" formControlName="pin">
         </label>
     </div>
     <button value="submit" [disabled]="!signupForm.valid">Submit</button>

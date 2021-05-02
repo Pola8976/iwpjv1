@@ -36,15 +36,17 @@ router.post('/new-customer', (req, res, next) => {
     var sql = 'INSERT INTO dupliCustomers (passhash, phone, email, age, sex, house, area, landmark, city, state, pin) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
     conn.query(sql, insArr, function (err, result) {
         if (err) {
-            res.json(err);
+            var reply = { result: "error", code: err.code, msg: err.sqlMessage };
+            res.json(reply);
             console.log(err);
         }
         else {
-            res.json(result);
+            var reply = { result: "success" };
+            res.json(reply);
             console.log(result);
         }
     });
     
-}); 
+});
 
 module.exports = router;
