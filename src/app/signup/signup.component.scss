@@ -1,0 +1,31 @@
+$formEleWidth: 60%;
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    width: $formEleWidth;
+}
+
+form > mat-form-field {
+    width: $formEleWidth;
+}
+
+form > div > mat-form-field {
+    width: 100%;
+}
+
+mat-radio-group, form > button {
+    width: $formEleWidth;
+}
+
+* ~ .mat-radio-button {
+    margin-left: 16px;
+}

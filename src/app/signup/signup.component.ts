@@ -9,6 +9,10 @@ import { BackconnService } from '../backconn.service';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
+
+  hidePass = true;
+  hideReenter = true;
+
   signupForm = this.formBuilder.group({
     fullName: ['Amit', Validators.required],
     // username: ['', Validators.required],
