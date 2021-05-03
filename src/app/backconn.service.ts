@@ -22,7 +22,11 @@ export class BackconnService {
   
   headers = new HttpHeaders({'Content-Type':  'application/json'});
 
-  postNewCustomer(reqBody: string): Observable<any> {
-    return this.http.post(this.rootUrl + '/new-customer', reqBody, {headers: this.headers});
+  signup(reqBody: string): Observable<any> {
+    return this.http.post(this.rootUrl + '/signup', reqBody, {headers: this.headers});
+  }
+
+  login(reqBody: string): Observable<any> {
+    return this.http.post(this.rootUrl + '/login', reqBody, {headers: this.headers});
   }
 }

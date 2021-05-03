@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 
 
 const materialComponents = [
@@ -16,6 +17,7 @@ const materialComponents = [
   MatInputModule,
   MatRadioModule,
   MatButtonModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({

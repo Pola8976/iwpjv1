@@ -1,4 +1,10 @@
-<h3>Welcome to Primorye</h3>
+<div>
+    <span class="mat-display-2">Welcome to Primorye</span><br>
+    <span class="mat-subheading-2">
+        Already a member? Go to
+        <a routerLink="/login">Login</a>
+    </span>
+</div>
 
 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline">

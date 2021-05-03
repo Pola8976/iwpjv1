@@ -6,24 +6,22 @@ const router = require('./routes');
 const app = express();
 const port = 3000;
 
-var conn = mysql.createConnection({
-  user: 'appaccess',
-  password: 'angexp',
-  database: 'test',
-  host: 'localhost',
-  port: 3306
-})
+// var conn = mysql.createConnection({
+//   user: 'appaccess',
+//   password: 'angexp',
+//   database: 'test',
+//   host: 'localhost',
+//   port: 3306
+// })
 
-conn.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
+// conn.connect(function(err) {
+//   if (err) throw err;
+//   console.log("Connected!");
+// });
 
-conn.query('SELECT 1+2 AS solution FROM DUAL', function (err, rows, fields) {
-  if (err) throw err;
+// conn.query('SELECT 1+2 AS solution FROM DUAL', function (err, rows, fields) {
+//   if (err) throw err;
 
-  console.log('The solution is: ', rows[0].solution);
-})
 
 app.use(cors());
 // app.use(express.urlencoded());

@@ -54,7 +54,7 @@ export class SignupComponent implements OnInit {
   onSubmit(): void {
     const formJson = JSON.stringify(this.signupForm.value);
     console.log(formJson);
-    this.backconnService.postNewCustomer(formJson).subscribe(reply => {
+    this.backconnService.signup(formJson).subscribe(reply => {
       console.log(reply);
       if(reply.result == "success") {
         this.signupForm.reset();
@@ -67,6 +67,7 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
   }
 
 }
