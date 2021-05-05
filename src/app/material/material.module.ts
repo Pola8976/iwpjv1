@@ -7,6 +7,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker'
 
 
 const materialComponents = [
@@ -18,6 +20,8 @@ const materialComponents = [
   MatRadioModule,
   MatButtonModule,
   MatSnackBarModule,
+  MatNativeDateModule,
+  MatDatepickerModule,
 ];
 
 @NgModule({

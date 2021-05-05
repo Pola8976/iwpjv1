@@ -1,4 +1,4 @@
-<div>
+<div class="main-text">
     <span class="mat-display-2">Welcome to Primorye</span><br>
     <span class="mat-subheading-2">
         Already a member? Go to
@@ -33,32 +33,37 @@
                 <mat-icon>{{hideReenter ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
         </mat-form-field>
-        
     </div>
+
     <mat-form-field appearance="outline">
         <mat-label>Phone</mat-label>
         <input matInput type="text" name="phone" formControlName="phone">
         <mat-hint></mat-hint>
         <mat-error *ngIf="signupForm.get('phone').invalid">Only numerals</mat-error>
     </mat-form-field>
+
     <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput type="email" name="email" formControlName="email" required>
         <mat-hint></mat-hint>
         <mat-error *ngIf="signupForm.get('email').invalid">unlike lmn@pqr[.xyz]</mat-error>
     </mat-form-field>
+
     <mat-form-field appearance="outline">
-        <mat-label>Age</mat-label>
-        <input matInput type="text" name="age" formControlName="age" required>
-        <mat-hint></mat-hint>
-        <mat-error *ngIf="signupForm.get('age').invalid">Minimum 13</mat-error>
+        <mat-label>Date of Birth</mat-label>
+        <input matInput type="text" [max]="maxDate" formControlName="dob" [matDatepicker]="dobPicker" required>
+        <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dobPicker></mat-datepicker>
+        <mat-error>Age limit 13</mat-error>
     </mat-form-field>
+
     <mat-radio-group name="sex" formControlName="sex">
         <label for="sex" id="sexLabel"><span class="mat-subheading-2">Sex</span></label>
         <mat-radio-button value="m">Male</mat-radio-button>
         <mat-radio-button value="f">Female</mat-radio-button>
         <mat-radio-button value="o">Other</mat-radio-button>
     </mat-radio-group>
+
     <div formGroupName="address">
         <span class="mat-title">Address</span>
         <mat-form-field appearance="outline">
@@ -67,30 +72,35 @@
             <mat-hint></mat-hint>
             <mat-error *ngIf="signupForm.get(['address', 'house']).invalid">House required</mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Area</mat-label>
             <input matInput type="text" name="area" formControlName="area" required>
             <mat-hint></mat-hint>
             <mat-error *ngIf="signupForm.get(['address', 'area']).invalid">Area required</mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Landmark</mat-label>
             <input matInput type="text" name="landmark" formControlName="landmark" required>
             <mat-hint></mat-hint>
             <mat-error *ngIf="signupForm.get(['address', 'landmark']).invalid"></mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>City</mat-label>
             <input matInput type="text" name="city" formControlName="city" required>
             <mat-hint></mat-hint>
             <mat-error *ngIf="signupForm.get(['address', 'city']).invalid">City required</mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>State</mat-label>
             <input matInput type="text" name="state" formControlName="state" required>
             <mat-hint></mat-hint>
             <mat-error *ngIf="signupForm.get(['address', 'state']).invalid">State required</mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Pin</mat-label>
             <input matInput type="text" name="pin" formControlName="pin" required>
@@ -98,6 +108,7 @@
             <mat-error *ngIf="signupForm.get(['address', 'pin']).invalid">unlike 6 digit number</mat-error>
         </mat-form-field>
     </div>
+
     <button mat-flat-button color="accent" value="submit" [disabled]="!signupForm.valid">Submit</button>
 </form>
 
@@ -108,7 +119,7 @@
 <p>{{ signupForm.get(['passwords', 'pass']).invalid }}</p>
 <p>{{ signupForm.get(['passwords', 'reenter']).invalid }}</p>
 <p>{{ signupForm.get('phone').invalid }}</p>
-<p>{{ signupForm.get('age').invalid }}</p>
+<p>{{ signupForm.get('dob').invalid }}</p>
 <p>{{ signupForm.get('email').invalid }}</p>
 <p>{{ signupForm.get('sex').invalid }}</p>
 <p>{{ signupForm.get(['address', 'house']).invalid }}</p>

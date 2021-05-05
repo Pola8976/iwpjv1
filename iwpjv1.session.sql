@@ -19,3 +19,7 @@ SELECT * FROM duplicustomers;
 
 -- @BLOCK
 DELETE FROM dupliCustomers;
+
+-- @BLOCK
+SELECT CURRENT_DATE FROM DUAL;
+

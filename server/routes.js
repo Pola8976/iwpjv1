@@ -16,7 +16,7 @@ console.log("Connected!");
 });
 
 
-var cid;
+var cid = -1;
 
 // router.get('/test', (req, res, next) => {
 //     conn.query('SELECT id, someattri FROM test', function (err, rows, fields) {
@@ -29,13 +29,14 @@ var cid;
 
 router.post('/signup', (req, res, next) => {
     with(req.body) {
-        var insArr = [fullName, passwords.pass, phone, email, age, sex];
+        var insArr = [fullName, passwords.pass, phone, email, sex];
         with(address) {
             insArr.push(house, area, landmark, city, state, pin);
         }
     }
+    insArr.push(req.body.dob.slice(0,req.body.dob.indexOf('T')));
     console.log(insArr);
-    var sql = 'INSERT INTO dupliCustomers (name, passhash, phone, email, age, sex, house, area, landmark, city, state, pin) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
+    var sql = 'INSERT INTO duplicustomers (name, passhash, phone, email, sex, house, area, landmark, city, state, pin, dob) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
     conn.query(sql, insArr, function (err, result) {
         if (err) {
             var reply = { result: "error", code: err.code, msg: err.sqlMessage };
@@ -55,7 +56,7 @@ router.post('/login', (req, res, next) => {
     with(req.body)
         var insArr = [email, pass];
     console.log(insArr);
-    var sql = 'SELECT cid, name FROM dupliCustomers WHERE email = ? AND passhash = ?';
+    var sql = 'SELECT cid, name FROM duplicustomers WHERE email = ? AND passhash = ?';
     conn.query(sql, insArr, function (err, rows, fields) {
         if (err) {
             var reply = { result: "error", code: err.code, msg: err.sqlMessage };
@@ -75,6 +76,12 @@ router.post('/login', (req, res, next) => {
         }
     });
     
+});
+
+router.get('/logout', (req, res, next) => {
+    cid = -1;
+    var reply = {result: "success"};
+    res.json(reply);
 });
 
 module.exports = router;

@@ -29,4 +29,8 @@ export class BackconnService {
   login(reqBody: string): Observable<any> {
     return this.http.post(this.rootUrl + '/login', reqBody, {headers: this.headers});
   }
+
+  logout(): Observable<any> {
+    return this.http.get(this.rootUrl + '/logout');
+  }
 }

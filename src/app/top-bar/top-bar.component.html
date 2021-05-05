@@ -4,11 +4,25 @@
             <mat-icon>menu</mat-icon>
         </button>
         <a class="top-link title" routerLink="">Primorye</a>
-        <span class="example-spacer"></span>
-        <a routerLink="/cart" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-            <mat-icon md-dark>shopping_cart</mat-icon>
-        </a>
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <span class="top-bar-spacer"></span>
+        <span *ngIf="isSetSessionCname()">
+            <span>Welcome, {{ isSetSessionCname() }}</span>
+            <a routerLink="/cart" mat-icon-button aria-label="shopping cart">
+                <mat-icon md-dark>shopping_cart</mat-icon>
+            </a>
+            <button (click)="logout()" mat-icon-button aria-label="logout">
+                <mat-icon md-dark>logout</mat-icon>
+            </button>
+        </span>
+        <span *ngIf="!isSetSessionCname()">
+            <a routerLink="/signup" mat-icon-button aria-label="signup">
+                <mat-icon md-dark>person_add</mat-icon>
+            </a>
+            <a routerLink="/login" mat-icon-button aria-label="login">
+                <mat-icon md-dark>login</mat-icon>
+            </a>
+        </span>
+        <button mat-icon-button aria-label="Example icon-button with share icon">
             <mat-icon>share</mat-icon>
         </button>
     </mat-toolbar>

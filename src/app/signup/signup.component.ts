@@ -12,25 +12,26 @@ export class SignupComponent implements OnInit {
 
   hidePass = true;
   hideReenter = true;
+  maxDate: Date;
 
   signupForm = this.formBuilder.group({
-    fullName: ['Amit', Validators.required],
+    fullName: ['', Validators.required],
     // username: ['', Validators.required],
     passwords: this.formBuilder.group({
-      pass: ['Aa!12345', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&]).{8,24}')]],
-      reenter: ['Aa!12345', Validators.required],
+      pass: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&]).{8,24}')]],
+      reenter: ['', Validators.required],
     }, {validators: this.mustMatch('pass', 'reenter')}),
-    phone: ['9876543210', Validators.pattern('[0-9]*')],
-    email: ['amit@example.com', [Validators.required, Validators.email]],
-    age: [19, Validators.min(13)],
-    sex: ['m'],
+    phone: ['', Validators.pattern('[0-9]*')],
+    email: ['', [Validators.required, Validators.email]],
+    dob: ['',[Validators.required]],
+    sex: [''],
     address: this.formBuilder.group({
-      house: ['A11', Validators.required],
-      area: ['abc', Validators.required],
-      landmark: ['def'],
-      city: ['Pune', Validators.required],
-      state: ['Maharashtra', Validators.required],
-      pin: ['411001', [Validators.required, Validators.pattern('^[0-9]{6}$')]],
+      house: ['', Validators.required],
+      area: ['', Validators.required],
+      landmark: [''],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      pin: ['', [Validators.required, Validators.pattern('^[0-9]{6}$')]],
     }),
   });
 
@@ -67,7 +68,9 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.maxDate = new Date();
+    const today = new Date();
+    this.maxDate.setFullYear(today.getFullYear()-13);
   }
 
 }
