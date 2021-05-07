@@ -73,7 +73,7 @@ router.post('/login', (req, res) => {
             else {
                 if(bcrypt.compareSync(req.body.pass, rows[0].passhash)) {
                     const token = genAuthToken({ id: rows[0].id });
-                    var reply = { result: "success", cname: rows[0].name, authToken: token };
+                    var reply = { result: "success", name: rows[0].name, authToken: token };
                 }
 
                 else

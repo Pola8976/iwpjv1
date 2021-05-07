@@ -17,6 +17,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { SellerSignupComponent } from './seller/seller-signup/seller-signup.component';
 import { SellerLoginComponent } from './seller/seller-login/seller-login.component';
 import { AuthGuard } from './auth.guard';
+import { SellerComponent } from './seller/seller/seller.component';
+import { SellerDashboardComponent } from './seller/seller-dashboard/seller-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { AuthGuard } from './auth.guard';
     SignupComponent,
     DashboardComponent,
     SellerSignupComponent,
-    SellerLoginComponent
+    SellerLoginComponent,
+    SellerComponent,
+    SellerDashboardComponent
   ],
   imports: [
     BrowserModule,

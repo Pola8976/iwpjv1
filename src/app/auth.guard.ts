@@ -23,7 +23,35 @@ export class AuthGuard implements CanActivate {
         return false;
       }
 
-      return true;
+      else {
+        if(route.url.join('').indexOf('seller') == 0)
+          if(localStorage.getItem('type') == 'seller')
+            return true;
+          else {
+            this.router.navigate(['seller/login']);
+            return false;
+          }
+        else
+          if(localStorage.getItem('type') == 'customer')
+            return true;
+          else {
+            this.router.navigate(['login']);
+            return false;
+          }
+      }
+    }
+
+    canActivateChild(
+      childRoute: ActivatedRouteSnapshot,
+      state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        console.log(childRoute.url.join(''));
+      
+        if(!localStorage.getItem("token")) {
+          this.router.navigate(['/login']);
+          return false;
+        }
+  
+        return true;
     }
   
 }

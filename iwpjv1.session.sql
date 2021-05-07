@@ -15,14 +15,19 @@ VALUES (
 );
 
 -- @BLOCK
+SELECT CURRENT_DATE FROM DUAL;
+
+-- @BLOCK
 SELECT * FROM customers;
 
 -- @BLOCK
-DELETE FROM sellers;
+SELECT * FROM sellers;
 
 -- @BLOCK
-SELECT CURRENT_DATE FROM DUAL;
+DELETE FROM customers;
 
+-- @BLOCK
+DELETE FROM sellers;
 
 -- @BLOCK
 DESC sellers;

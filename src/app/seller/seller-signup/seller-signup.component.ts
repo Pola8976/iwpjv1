@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BackconnService } from 'src/app/backconn.service';
+import { SnackBarService } from 'src/app/snack-bar.service';
 
 @Component({
   selector: 'app-seller-signup',
@@ -14,10 +15,12 @@ export class SellerSignupComponent implements OnInit {
   hideReenter = true;
   maxDate: Date;
 
+  // pass: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&]).{8,24}')]],
+
   signupForm = this.formBuilder.group({
     ownName: ['', Validators.required],
     passwords: this.formBuilder.group({
-      pass: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&]).{8,24}')]],
+      pass: ['', Validators.required],
       reenter: ['', Validators.required],
     }, {validators: this.mustMatch('pass', 'reenter')}),
     phone: ['', Validators.pattern('[0-9]*')],
@@ -40,6 +43,7 @@ export class SellerSignupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private backconnService: BackconnService,
     private router: Router,
+    private snackBar: SnackBarService,
   ) { }
 
   mustMatch(pass: string, reenter: string) {
@@ -63,7 +67,7 @@ export class SellerSignupComponent implements OnInit {
         this.router.navigate(['/seller/login']);
       }
       else {
-        alert("error");
+        this.snackBar.serveSnackBar("Server error");
       }
     });
   }

@@ -19,8 +19,11 @@ export class BackconnService {
   getTest(): Observable<any> {
     return this.http.get(this.rootUrl + '/test');
   }
-  
-  headers = new HttpHeaders({'Content-Type':  'application/json'});
+
+  headers = new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  });
 
   signup(reqBody: string): Observable<any> {
     return this.http.post(this.rootUrl + '/signup', reqBody, {headers: this.headers});
@@ -30,11 +33,11 @@ export class BackconnService {
     return this.http.post(this.rootUrl + '/login', reqBody, {headers: this.headers});
   }
 
-  logout(): Observable<any> {
-    return this.http.get(this.rootUrl + '/logout');
-  }
-
   sellerSignup(reqBody: string): Observable<any> {
     return this.http.post(this.rootUrl + '/seller/signup', reqBody, {headers: this.headers});
+  }
+
+  sellersLogin(reqBody: string): Observable<any> {
+    return this.http.post(this.rootUrl + '/seller/login', reqBody, {headers: this.headers});
   }
 }

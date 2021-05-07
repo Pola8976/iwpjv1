@@ -1,1 +1,44 @@
-<p>seller-login works!</p>
+<div class="main-text">
+    <span class="mat-display-2">Welcome to Primorye</span><br>
+    <span class="mat-subheading-2">
+        Not a member? Go
+        <a routerLink="/seller/signup">Sign up</a>
+    </span>
+</div>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" name="email" formControlName="email" required>
+        <mat-hint></mat-hint>
+        <mat-error *ngIf="loginForm.get('email').invalid">unlike lmn@pqr[.xyz]</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hidePass ? 'password' : 'text'" name="pass" formControlName="pass" required>
+        <mat-error *ngIf="loginForm.get('pass').invalid">Invalid format</mat-error>
+        <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+            <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <button mat-flat-button color="accent" value="submit" [disabled]="!loginForm.valid">Submit</button>
+</form>
+
+<!-- <p>Form Value: {{ loginForm.value | json }}</p>
+<p>Form Status: {{ loginForm.status }}</p>
+
+<p>{{ signupForm.get('fullName').invalid }}</p>
+<p>{{ signupForm.get(['passwords', 'pass']).invalid }}</p>
+<p>{{ signupForm.get(['passwords', 'reenter']).invalid }}</p>
+<p>{{ signupForm.get('phone').invalid }}</p>
+<p>{{ signupForm.get('age').invalid }}</p>
+<p>{{ signupForm.get('email').invalid }}</p>
+<p>{{ signupForm.get('sex').invalid }}</p>
+<p>{{ signupForm.get(['address', 'house']).invalid }}</p>
+<p>{{ signupForm.get(['address', 'area']).invalid }}</p>
+<p>{{ signupForm.get(['address', 'landmark']).invalid }}</p>
+<p>{{ signupForm.get(['address', 'city']).invalid }}</p>
+<p>{{ signupForm.get(['address', 'state']).invalid }}</p>
+<p>{{ signupForm.get(['address', 'pin']).invalid }}</p> -->

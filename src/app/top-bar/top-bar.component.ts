@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { BackconnService } from '../backconn.service';
+import { SnackBarService } from '../snack-bar.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -10,10 +11,12 @@ import { BackconnService } from '../backconn.service';
 export class TopBarComponent implements OnInit {
 
   dispSellers: string = "";
+  linkSellers: string = "";
 
   constructor(
     private backConnService: BackconnService,
     private router: Router,
+    private snackBar: SnackBarService,
   ) { }
 
   isLoggedIn(): string | null {
@@ -21,27 +24,26 @@ export class TopBarComponent implements OnInit {
   }
 
   logout(): void {
-    this.backConnService.logout().subscribe(reply => {
-      console.log(reply);
-      if(reply.result == "success") {
-        localStorage.removeItem('token');
-        this.router.navigate(['']);
-      }
-      else {
-        alert("error");
-      }
-    });
+    localStorage.removeItem('token');
+    this.router.navigate(['']);
+  }
+
+  dynaLink(piece: string): string {
+    return this.linkSellers + piece;
   }
 
   ngOnInit(): void {
     this.router.events.subscribe(e => {
       if (e instanceof NavigationEnd) {
         console.log(e.url);
-        if(e.url.indexOf("/seller/") == 0)
+        if(e.url.indexOf("/seller") == 0) {
           this.dispSellers = " Sellers";
-        else
+          this.linkSellers = "seller/"
+        }
+        else {
           this.dispSellers = "";
-        
+          this.linkSellers = "";
+        }
         console.log(this.dispSellers);
       }
      });

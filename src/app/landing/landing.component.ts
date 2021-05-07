@@ -9,7 +9,7 @@ import { BackconnService } from '../backconn.service';
 export class LandingComponent implements OnInit {
 
   constructor(
-    private backconnService: BackconnService,
+    // private backconnService: BackconnService,
   ) { }
 
   ngOnInit(): void {

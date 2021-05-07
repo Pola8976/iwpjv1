@@ -18,10 +18,10 @@
             </button>
         </span>
         <span *ngIf="!isLoggedIn()">
-            <a routerLink="/signup" mat-icon-button aria-label="signup">
+            <a [routerLink]="dynaLink('signup')" mat-icon-button aria-label="signup">
                 <mat-icon md-dark>person_add</mat-icon>
             </a>
-            <a routerLink="/login" mat-icon-button aria-label="login">
+            <a [routerLink]="dynaLink('login')" mat-icon-button aria-label="login">
                 <mat-icon md-dark>login</mat-icon>
             </a>
         </span>

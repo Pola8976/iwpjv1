@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BackconnService } from 'src/app/backconn.service';
+import { SnackBarService } from 'src/app/snack-bar.service';
 
 @Component({
   selector: 'app-seller-login',
@@ -14,15 +14,15 @@ export class SellerLoginComponent implements OnInit {
   hidePass = true;
 
   loginForm = this.formBuilder.group({
-    email: ['amit@example.com', [Validators.required, Validators.email]],
-    pass: ['Aa!12345', Validators.required],
+    email: ['amitdivekar01@gmail.com', [Validators.required, Validators.email]],
+    pass: ['qwerty', Validators.required],
   });
 
   constructor(
     private formBuilder: FormBuilder,
     private backconnService: BackconnService,
     private router: Router,
-    private matSnackBar: MatSnackBar,
+    private snackBar: SnackBarService,
   ) { }
 
   onSubmit(): void {
@@ -32,18 +32,17 @@ export class SellerLoginComponent implements OnInit {
       console.log(reply);
       if(reply.result == "success") {
         this.loginForm.reset();
-        sessionStorage.setItem('sname', reply.sname);
-        console.log(sessionStorage.getItem('sname'));
-        this.router.navigate(['/dash']);
+        localStorage.setItem('token', reply.authToken);
+        localStorage.setItem('type', 'seller');
+        localStorage.setItem('name', reply.name);
+        console.log(sessionStorage.getItem('name'));
+        this.router.navigate(['/seller/dash']);
       }
       else if(reply.result == "empty") {
-        this.matSnackBar.open('No such email and/or password', 'X', {
-          horizontalPosition: 'center' as MatSnackBarHorizontalPosition,
-          verticalPosition: 'top' as MatSnackBarVerticalPosition,
-        });
+        this.snackBar.serveSnackBar("No such email and/or password");
       }
       else {
-        alert("server error");
+        this.snackBar.serveSnackBar("Server error");
       }
     });
   }
