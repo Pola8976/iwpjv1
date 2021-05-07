@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { BackconnService } from '../backconn.service';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar'
+import { BackconnService } from 'src/app/backconn.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-seller-login',
+  templateUrl: './seller-login.component.html',
+  styleUrls: ['./seller-login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class SellerLoginComponent implements OnInit {
 
   hidePass = true;
 
@@ -32,10 +32,8 @@ export class LoginComponent implements OnInit {
       console.log(reply);
       if(reply.result == "success") {
         this.loginForm.reset();
-        localStorage.setItem('token', reply.authToken);
-        localStorage.setItem('type', 'customer');
-        localStorage.setItem('name', reply.cname);
-        console.log(sessionStorage.getItem('cname'));
+        sessionStorage.setItem('sname', reply.sname);
+        console.log(sessionStorage.getItem('sname'));
         this.router.navigate(['/dash']);
       }
       else if(reply.result == "empty") {

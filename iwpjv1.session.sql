@@ -4,7 +4,7 @@ VALUES (
   'Aa!12345',
   '9876543210',
   'amit@example.com',
-  19,
+  '2001-12-26',
   'm',
   'A11',
   'abc',
@@ -15,14 +15,14 @@ VALUES (
 );
 
 -- @BLOCK
-SELECT * FROM duplicustomers;
+SELECT * FROM customers;
 
 -- @BLOCK
-DELETE FROM duplicustomers;
+DELETE FROM sellers;
 
 -- @BLOCK
 SELECT CURRENT_DATE FROM DUAL;
 
 
 -- @BLOCK
-DESC customers;
+DESC sellers;

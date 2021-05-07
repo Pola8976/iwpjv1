@@ -3,6 +3,10 @@ const router = express.Router();
 const mysql = require('mysql');
 const bcrypt = require('bcryptjs');
 const nodemailer = require("nodemailer");
+const dotenv = require('dotenv');
+const jwt = require('jsonwebtoken');
+
+dotenv.config();
 
 var conn = mysql.createConnection({
     user: 'appaccess',
@@ -12,34 +16,32 @@ var conn = mysql.createConnection({
     port: 3306
 });
   
+var cid = -1;
+
 conn.connect(function(err) {
     if (err) throw err;
 console.log("Connected!");
 });
 
+function genAuthToken(idt) {
+    return jwt.sign(idt, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
+}
 
-var cid = -1;
-
-// router.get('/test', (req, res, next) => {
-//     conn.query('SELECT id, someattri FROM test', function (err, rows, fields) {
-//         if (err)
-//             res.json(err);
-//         else
-//             res.json(rows);
-//       });
-// });
-
-router.post('/signup', (req, res, next) => {
+router.post('/signup', (req, res) => {
     with(req.body) {
-        var insArr = [fullName, phone, email, sex];
+        var insArr = [fullName, email, sex];
+        if(phone === '')
+            insArr.push(null);
+        else
+            insArr.push(phone);
+        insArr.push(dob.slice(0,dob.indexOf('T')));
+        insArr.push(bcrypt.hashSync(passwords.pass, 10));
         with(address) {
             insArr.push(house, area, landmark, city, state, pin);
         }
     }
-    insArr.push(req.body.dob.slice(0,req.body.dob.indexOf('T')));
-    insArr.push(bcrypt.hashSync(req.body.passwords.pass, 10));
     console.log(insArr);
-    var sql = 'INSERT INTO duplicustomers (name, phone, email, sex, house, area, landmark, city, state, pin, dob, passhash) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
+    var sql = 'INSERT INTO customers (name, email, sex, phone, dob, passhash, house, area, landmark, city, state, pin) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
     conn.query(sql, insArr, function (err, result) {
         if (err) {
             var reply = { result: "error", code: err.code, msg: err.sqlMessage };
@@ -55,22 +57,25 @@ router.post('/signup', (req, res, next) => {
     
 });
 
-router.post('/login', (req, res, next) => {
-    var sql = 'SELECT cid, name, passhash FROM duplicustomers WHERE email = ?';
+router.post('/login', (req, res) => {
+    var sql = 'SELECT id, name, passhash FROM customers WHERE email = ?';
     conn.query(sql, [req.body.email], function (err, rows, fields) {
         if (err) {
             var reply = { result: "error", code: err.code, msg: err.sqlMessage };
             res.json(reply);
             console.log(err);
         }
+
         else {
             if(!rows.length)
                 var reply = { result: "empty" };
-            else if(rows.length == 1) {
+
+            else {
                 if(bcrypt.compareSync(req.body.pass, rows[0].passhash)) {
-                    var reply = { result: "success", cname: rows[0].name };
-                    cid = rows[0].cid;
+                    const token = genAuthToken({ id: rows[0].id });
+                    var reply = { result: "success", cname: rows[0].name, authToken: token };
                 }
+
                 else
                     var reply = { result: "empty" };
             }
@@ -82,10 +87,35 @@ router.post('/login', (req, res, next) => {
     
 });
 
-router.get('/logout', (req, res, next) => {
+router.get('/logout', (req, res) => {
     cid = -1;
     var reply = {result: "success"};
     res.json(reply);
+});
+
+router.post('/seller/signup', (req, res) => {
+    with(req.body) {
+        var insArr = [ownName, phone, email, sex, busName, gstin];
+        with(address) {
+            insArr.push(shop, area, landmark, city, state, pin);
+        }
+    }
+    insArr.push(req.body.dob.slice(0,req.body.dob.indexOf('T')));
+    insArr.push(bcrypt.hashSync(req.body.passwords.pass, 10));
+    console.log(insArr);
+    var sql = 'INSERT INTO sellers (name_owner, phone, email, sex, name_business, gstin, shop, area, landmark, city, state, pin, dob, passhash) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    conn.query(sql, insArr, function (err, result) {
+        if (err) {
+            var reply = { result: "error", code: err.code, msg: err.sqlMessage };
+            res.json(reply);
+            console.log(err);
+        }
+        else {
+            var reply = { result: "success" };
+            res.json(reply);
+            console.log(result);
+        }
+    });
 });
 
 module.exports = router;

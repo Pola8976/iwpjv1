@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { BackconnService } from '../backconn.service';
 
 @Component({
@@ -9,20 +9,22 @@ import { BackconnService } from '../backconn.service';
 })
 export class TopBarComponent implements OnInit {
 
+  dispSellers: string = "";
+
   constructor(
     private backConnService: BackconnService,
     private router: Router,
   ) { }
 
-  isSetSessionCname(): string | null {
-    return sessionStorage.getItem('cname') ? sessionStorage.getItem('cname') : null;
+  isLoggedIn(): string | null {
+    return localStorage.getItem('token') ? localStorage.getItem('name') : null;
   }
 
   logout(): void {
     this.backConnService.logout().subscribe(reply => {
       console.log(reply);
       if(reply.result == "success") {
-        sessionStorage. removeItem('cname');
+        localStorage.removeItem('token');
         this.router.navigate(['']);
       }
       else {
@@ -32,6 +34,17 @@ export class TopBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.router.events.subscribe(e => {
+      if (e instanceof NavigationEnd) {
+        console.log(e.url);
+        if(e.url.indexOf("/seller/") == 0)
+          this.dispSellers = " Sellers";
+        else
+          this.dispSellers = "";
+        
+        console.log(this.dispSellers);
+      }
+     });
   }
 
 }

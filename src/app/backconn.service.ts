@@ -33,4 +33,8 @@ export class BackconnService {
   logout(): Observable<any> {
     return this.http.get(this.rootUrl + '/logout');
   }
+
+  sellerSignup(reqBody: string): Observable<any> {
+    return this.http.post(this.rootUrl + '/seller/signup', reqBody, {headers: this.headers});
+  }
 }

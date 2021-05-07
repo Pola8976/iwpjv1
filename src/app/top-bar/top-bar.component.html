@@ -3,10 +3,13 @@
         <button mat-icon-button class="example-icon" aria-label="hamburger menu icon">
             <mat-icon>menu</mat-icon>
         </button>
-        <a class="top-link title" routerLink="">Primorye</a>
+        <span>
+            <a class="top-link title" routerLink="">Primorye</a>
+            <a class="top-link title" routerLink="seller">{{ dispSellers }}</a>
+        </span>
         <span class="top-bar-spacer"></span>
-        <span *ngIf="isSetSessionCname()">
-            <span>Welcome, {{ isSetSessionCname() }}</span>
+        <span *ngIf="isLoggedIn()">
+            <span>Welcome, {{ isLoggedIn() }}</span>
             <a routerLink="/cart" mat-icon-button aria-label="shopping cart">
                 <mat-icon md-dark>shopping_cart</mat-icon>
             </a>
@@ -14,7 +17,7 @@
                 <mat-icon md-dark>logout</mat-icon>
             </button>
         </span>
-        <span *ngIf="!isSetSessionCname()">
+        <span *ngIf="!isLoggedIn()">
             <a routerLink="/signup" mat-icon-button aria-label="signup">
                 <mat-icon md-dark>person_add</mat-icon>
             </a>

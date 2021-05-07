@@ -14,6 +14,9 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { SellerSignupComponent } from './seller/seller-signup/seller-signup.component';
+import { SellerLoginComponent } from './seller/seller-login/seller-login.component';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     LandingComponent,
     LoginComponent,
     SignupComponent,
-    DashboardComponent
+    DashboardComponent,
+    SellerSignupComponent,
+    SellerLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     ReactiveFormsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
