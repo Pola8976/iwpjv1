@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
+const bcrypt = require('bcryptjs');
+const nodemailer = require("nodemailer");
 
 var conn = mysql.createConnection({
     user: 'appaccess',
@@ -29,14 +31,15 @@ var cid = -1;
 
 router.post('/signup', (req, res, next) => {
     with(req.body) {
-        var insArr = [fullName, passwords.pass, phone, email, sex];
+        var insArr = [fullName, phone, email, sex];
         with(address) {
             insArr.push(house, area, landmark, city, state, pin);
         }
     }
     insArr.push(req.body.dob.slice(0,req.body.dob.indexOf('T')));
+    insArr.push(bcrypt.hashSync(req.body.passwords.pass, 10));
     console.log(insArr);
-    var sql = 'INSERT INTO duplicustomers (name, passhash, phone, email, sex, house, area, landmark, city, state, pin, dob) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
+    var sql = 'INSERT INTO duplicustomers (name, phone, email, sex, house, area, landmark, city, state, pin, dob, passhash) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
     conn.query(sql, insArr, function (err, result) {
         if (err) {
             var reply = { result: "error", code: err.code, msg: err.sqlMessage };
@@ -53,11 +56,8 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-    with(req.body)
-        var insArr = [email, pass];
-    console.log(insArr);
-    var sql = 'SELECT cid, name FROM duplicustomers WHERE email = ? AND passhash = ?';
-    conn.query(sql, insArr, function (err, rows, fields) {
+    var sql = 'SELECT cid, name, passhash FROM duplicustomers WHERE email = ?';
+    conn.query(sql, [req.body.email], function (err, rows, fields) {
         if (err) {
             var reply = { result: "error", code: err.code, msg: err.sqlMessage };
             res.json(reply);
@@ -66,9 +66,13 @@ router.post('/login', (req, res, next) => {
         else {
             if(!rows.length)
                 var reply = { result: "empty" };
-            else {
-                var reply = { result: "success", cname: rows[0].name };
-                cid = rows[0].cid;
+            else if(rows.length == 1) {
+                if(bcrypt.compareSync(req.body.pass, rows[0].passhash)) {
+                    var reply = { result: "success", cname: rows[0].name };
+                    cid = rows[0].cid;
+                }
+                else
+                    var reply = { result: "empty" };
             }
             res.json(reply);
             console.log(rows);

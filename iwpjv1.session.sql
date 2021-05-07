@@ -18,8 +18,11 @@ VALUES (
 SELECT * FROM duplicustomers;
 
 -- @BLOCK
-DELETE FROM dupliCustomers;
+DELETE FROM duplicustomers;
 
 -- @BLOCK
 SELECT CURRENT_DATE FROM DUAL;
 
+
+-- @BLOCK
+DESC customers;
