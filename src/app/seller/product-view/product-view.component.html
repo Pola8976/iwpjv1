@@ -1,1 +1,44 @@
-<p>product-view works!</p>
+<div class="main-container">
+    <div><a mat-flat-button color="accent" class="button" routerLink="../edit">
+        Modify Product
+    </a></div>
+
+    <div>
+        <div class="mat-title">Product</div>
+        {{ product.prodName }}
+    </div>
+
+    <div>
+        <div class="mat-title">Category</div>
+        {{ product.catName }}
+    </div>
+    
+    <div>
+        <div class="mat-title">Price</div>
+        {{ product.price }}
+    </div>
+    
+    <div>
+        <div class="mat-title">Stock</div>
+        {{ product.stock }}
+    </div>
+    
+    <div>
+        <mat-form-field>
+            <mat-label>Stock Change</mat-label>
+            <input matInput type="number" [formControl]="stockChange">
+        </mat-form-field>
+        <a mat-flat-button color="warn" class="button" (click)="changeStock(false)">Subtract Stocks</a>
+        <a mat-flat-button color="primary" class="button" (click)="changeStock(true)">Add Stocks</a>
+    </div>
+
+    <div>
+        <div class="mat-title">Sold</div>
+        {{ product.sold }}
+    </div>
+    
+    <div>
+        <div class="mat-title">Description</div>
+        <span style="white-space: pre-line">{{ product.description }}</span>
+    </div>
+</div>

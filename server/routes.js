@@ -230,4 +230,23 @@ router.post('/seller/products', verifyAuthToken, (req, res) => {
     
 });
 
+router.post('/seller/stock', verifyAuthToken, (req, res) => {
+    with(req.body)
+        var insArr = [stock, pid];
+    var sql = "UPDATE products SET stock = ? WHERE id = ?";
+    conn.query(sql, insArr, function (err, result) {
+        if (err) {
+            var reply = { result: "error", code: err.code, msg: err.sqlMessage };
+            res.status(500).json(reply);
+            console.log(err);
+        }
+        else {
+            var reply = { result: "success"};
+            console.log(result);
+            res.status(200).json(reply);
+        }
+    });
+    
+});
+
 module.exports = router;

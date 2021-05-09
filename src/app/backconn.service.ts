@@ -59,4 +59,9 @@ export class BackconnService {
     this.genHeaders();
     return this.http.post(this.rootUrl + '/seller/products', reqBody, {headers: this.headers});
   }
+
+  changeStock(reqBody: string): Observable<any> {
+    this.genHeaders();
+    return this.http.post(this.rootUrl + '/seller/stock', reqBody, {headers: this.headers});
+  }
 }
