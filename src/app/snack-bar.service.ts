@@ -11,7 +11,7 @@ export class SnackBarService {
   ) { }
 
   serveSnackBar(msg: string, action: string = 'X', x = 'center', y = 'top') {
-    this.matSnackBar.open('No such email and/or password', 'X', {
+    this.matSnackBar.open(msg, action, {
       horizontalPosition: x as MatSnackBarHorizontalPosition,
       verticalPosition: y as MatSnackBarVerticalPosition,
     });

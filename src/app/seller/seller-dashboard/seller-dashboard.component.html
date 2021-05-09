@@ -1,1 +1,58 @@
-<p>seller-dashboard works!</p>
+<div class="main-container">
+
+<div class="mat-display-3">
+    {{ this.businessName }} 🌲 in Primorye 🏞️
+</div>
+
+<div><a mat-flat-button color="accent" class="button" routerLink="../create">
+    Add New Product
+</a></div>
+
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event.target.value)" type="text">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="prodName">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef> Product </th>
+            <td mat-cell *matCellDef="let element"> {{element.prodName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="catName">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef> Category </th>
+            <td mat-cell *matCellDef="let element"> {{element.catName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="stock">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef> Stock </th>
+            <td mat-cell *matCellDef="let element"> {{element.stock}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sold">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef> Sold </th>
+            <td mat-cell *matCellDef="let element"> {{element.sold}} </td>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="inventory">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+                <button (click)="goToDetails(1)" mat-icon-button aria-label="add">
+                    <mat-icon md-dark>add</mat-icon>
+                </button>
+            </td>
+        </ng-container> -->
+
+        <tr mat-header-row *matHeaderRowDef="colOrder"></tr>
+        <tr mat-row style="cursor: pointer;" (click)="goToDetails(row.id)" *matRowDef="let row; columns: colOrder;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10,20,30]" showFirstLastButtons></mat-paginator>
+</div>
+
+</div>

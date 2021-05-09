@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms'
+import { Router } from '@angular/router';
 import { BackconnService } from '../backconn.service';
 import { SnackBarService } from '../snack-bar.service';
 
@@ -41,14 +41,14 @@ export class SignupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private backconnService: BackconnService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
+    // private activatedRoute: ActivatedRoute,
     private snackBar: SnackBarService,
   ) { }
 
   mustMatch(pass: string, reenter: string) {
-    return (formGroup: FormGroup) => {
-      const control = formGroup.controls[pass];
-      const matchingControl = formGroup.controls[reenter];
+    return (controls: AbstractControl): ValidationErrors | null => {
+      const control = controls.get(pass);
+      const matchingControl = controls.get(reenter);
       if(matchingControl.errors && !matchingControl.errors.mustMatch)
         return null;
       if(control.value !== matchingControl.value)
@@ -72,7 +72,7 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.activatedRoute.snapshot.url.join(''));
+    // console.log(this.activatedRoute.snapshot.url.join(''));
 
     this.maxDate = new Date();
     const today = new Date();

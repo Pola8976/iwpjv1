@@ -13,12 +13,15 @@ import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
+// import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { SellerSignupComponent } from './seller/seller-signup/seller-signup.component';
 import { SellerLoginComponent } from './seller/seller-login/seller-login.component';
 import { AuthGuard } from './auth.guard';
 import { SellerComponent } from './seller/seller/seller.component';
 import { SellerDashboardComponent } from './seller/seller-dashboard/seller-dashboard.component';
+import { ProductCreateComponent } from './seller/product-create/product-create.component';
+import { ProductViewComponent } from './seller/product-view/product-view.component';
+import { ProductEditComponent } from './seller/product-edit/product-edit.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { SellerDashboardComponent } from './seller/seller-dashboard/seller-dashb
     SellerSignupComponent,
     SellerLoginComponent,
     SellerComponent,
-    SellerDashboardComponent
+    SellerDashboardComponent,
+    ProductCreateComponent,
+    ProductViewComponent,
+    ProductEditComponent
   ],
   imports: [
     BrowserModule,

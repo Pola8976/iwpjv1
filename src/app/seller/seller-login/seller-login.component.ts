@@ -28,13 +28,14 @@ export class SellerLoginComponent implements OnInit {
   onSubmit(): void {
     const formJson = JSON.stringify(this.loginForm.value);
     console.log(formJson);
-    this.backconnService.login(formJson).subscribe(reply => {
+    this.backconnService.sellersLogin(formJson).subscribe(reply => {
       console.log(reply);
       if(reply.result == "success") {
         this.loginForm.reset();
         localStorage.setItem('token', reply.authToken);
         localStorage.setItem('type', 'seller');
         localStorage.setItem('name', reply.name);
+        localStorage.setItem('business', reply.business);
         console.log(sessionStorage.getItem('name'));
         this.router.navigate(['/seller/dash']);
       }

@@ -1,0 +1,45 @@
+<form [formGroup]="productCreationForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <mat-label>Product Name</mat-label>
+        <input matInput type="text" name="prodName" formControlName="prodName" required>
+        <mat-hint></mat-hint>
+        <mat-error *ngIf="productCreationForm.get('prodName').invalid">Name required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select matInput name="category" formControlName="category" required>
+            <mat-option><span style="font-style: italic;">Select</span></mat-option>
+            <mat-option *ngFor="let row of rows" [value]="row.id">
+                {{ row.name }}
+            </mat-option>
+        </mat-select>
+        <mat-hint></mat-hint>
+        <mat-error *ngIf="productCreationForm.get('category').invalid"></mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput type="text" name="description" formControlName="description"></textarea>
+        <mat-hint></mat-hint>
+        <mat-error *ngIf="productCreationForm.get('description').invalid"></mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input matInput type="text" name="price" formControlName="price" required>
+        <mat-hint></mat-hint>
+        <mat-error *ngIf="productCreationForm.get('price').invalid">Postive price</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Initial quantity</mat-label>
+        <input matInput type="text" name="stock" formControlName="stock" required>
+        <mat-hint></mat-hint>
+        <mat-error *ngIf="productCreationForm.get('stock').invalid"></mat-error>
+    </mat-form-field>
+
+    <button mat-flat-button color="accent" value="submit" [disabled]="!productCreationForm.valid">Submit</button>
+</form>
+
+<p>{{ productCreationForm.get('category').value }}</p>

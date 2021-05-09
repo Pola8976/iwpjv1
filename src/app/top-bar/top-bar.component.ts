@@ -25,17 +25,24 @@ export class TopBarComponent implements OnInit {
 
   logout(): void {
     localStorage.removeItem('token');
-    this.router.navigate(['']);
+    this.router.navigate([this.linkSellers]);
   }
 
   dynaLink(piece: string): string {
     return this.linkSellers + piece;
   }
 
+  whatType(): string | boolean {
+    if(this.isLoggedIn())
+      return localStorage.getItem('type');
+    else
+      return false;
+  }
+
   ngOnInit(): void {
     this.router.events.subscribe(e => {
       if (e instanceof NavigationEnd) {
-        console.log(e.url);
+        // console.log(e.url);
         if(e.url.indexOf("/seller") == 0) {
           this.dispSellers = " Sellers";
           this.linkSellers = "seller/"
@@ -44,7 +51,7 @@ export class TopBarComponent implements OnInit {
           this.dispSellers = "";
           this.linkSellers = "";
         }
-        console.log(this.dispSellers);
+        // console.log(this.dispSellers);
       }
      });
   }

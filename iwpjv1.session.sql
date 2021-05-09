@@ -31,3 +31,6 @@ DELETE FROM sellers;
 
 -- @BLOCK
 DESC sellers;
+
+-- @BLOCK
+DESC products;

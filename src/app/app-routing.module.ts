@@ -4,6 +4,8 @@ import { AuthGuard } from './auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
+import { ProductCreateComponent } from './seller/product-create/product-create.component';
+import { ProductViewComponent } from './seller/product-view/product-view.component';
 import { SellerDashboardComponent } from './seller/seller-dashboard/seller-dashboard.component';
 import { SellerLoginComponent } from './seller/seller-login/seller-login.component';
 import { SellerSignupComponent } from './seller/seller-signup/seller-signup.component';
@@ -19,7 +21,10 @@ const routes: Routes = [
   { path: 'seller', component: SellerComponent },
   { path: 'seller/signup', component: SellerSignupComponent },
   { path: 'seller/login', component: SellerLoginComponent },
-  { path: 'seller/dash', component: SellerDashboardComponent, canActivate: [AuthGuard] }
+  { path: 'seller/dash', component: SellerDashboardComponent, canActivate: [AuthGuard] },
+  { path: 'seller/create', component: ProductCreateComponent, canActivate: [AuthGuard] },
+  { path: 'seller/view/:pid', component: ProductViewComponent, canActivate: [AuthGuard] },
+  { path: 'seller/edit/:pid', component: ProductViewComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
