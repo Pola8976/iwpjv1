@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BackconnService } from 'src/app/backconn.service';
 import { SnackBarService } from 'src/app/snack-bar.service';
@@ -47,9 +47,9 @@ export class SellerSignupComponent implements OnInit {
   ) { }
 
   mustMatch(pass: string, reenter: string) {
-    return (formGroup: FormGroup) => {
-      const control = formGroup.controls[pass];
-      const matchingControl = formGroup.controls[reenter];
+    return (controls: AbstractControl): ValidationErrors | null => {
+      const control = controls.get(pass);
+      const matchingControl = controls.get(reenter);
       if(matchingControl.errors && !matchingControl.errors.mustMatch)
         return null;
       if(control.value !== matchingControl.value)

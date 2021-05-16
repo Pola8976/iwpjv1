@@ -9,9 +9,12 @@
         </span>
         <span class="top-bar-spacer"></span>
         <span *ngIf="isLoggedIn()">
-            <span>Welcome, {{ isLoggedIn() }}</span>
+            <span style="vertical-align: -9%;">Welcome, {{ isLoggedIn() }}</span>
             <a [routerLink]="dynaLink('dash')" mat-icon-button aria-label="dashboard">
                 <mat-icon md-dark>dashboard</mat-icon>
+            </a>
+            <a [routerLink]="dynaLink('settings')" mat-icon-button aria-label="settings">
+                <mat-icon md-dark>settings</mat-icon>
             </a>
             <a *ngIf="whatType() == 'customer'" routerLink="/cart" mat-icon-button aria-label="shopping cart">
                 <mat-icon md-dark>shopping_cart</mat-icon>

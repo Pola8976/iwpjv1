@@ -1,5 +1,8 @@
 <div class="main-container">
-    <div><a mat-flat-button color="accent" class="button" routerLink="../edit">
+    <div class="mat-title">
+        Product Details
+    </div>
+    <div><a mat-flat-button color="accent" class="button"(click)="goToEdit()">
         Modify Product
     </a></div>
 
@@ -28,8 +31,8 @@
             <mat-label>Stock Change</mat-label>
             <input matInput type="number" [formControl]="stockChange">
         </mat-form-field>
-        <a mat-flat-button color="warn" class="button" (click)="changeStock(false)">Subtract Stocks</a>
-        <a mat-flat-button color="primary" class="button" (click)="changeStock(true)">Add Stocks</a>
+        <button mat-flat-button color="warn" class="button" (click)="changeStock(false)">Subtract Stocks</button>
+        <button mat-flat-button color="primary" class="button" (click)="changeStock(true)">Add Stocks</button>
     </div>
 
     <div>

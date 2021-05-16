@@ -1,63 +1,54 @@
 <div class="main-container">
 
-<span class="mat-display-2">Welcome to Primorye</span><br>
-<span class="mat-subheading-2">
-    Already a member? Go to
-    <a routerLink="/seller/login">Login</a>
-</span>
+<div class="mat-display-2">Your Profile 🧑</div>
 
-<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+<form [formGroup]="modifyForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline">
         <mat-label>Owner Name</mat-label>
         <input matInput type="text" name="ownName" formControlName="ownName" required>
         <mat-hint></mat-hint>
-        <mat-error *ngIf="signupForm.get('ownName').invalid">Name required</mat-error>
+        <mat-error *ngIf="modifyForm.get('ownName').invalid">Name required</mat-error>
     </mat-form-field>
 
     <div formGroupName="passwords">
         <mat-form-field appearance="outline">
-            <mat-label>Password</mat-label>
-            <input matInput [type]="hidePass ? 'password' : 'text'" name="pass" formControlName="pass" required>
-            <mat-error *ngIf="signupForm.get(['passwords', 'pass']).invalid">Invalid format</mat-error>
-            <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
-                <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
+            <mat-label>New Password</mat-label>
+            <input matInput type="password" name="pass" formControlName="pass">
+            <mat-error *ngIf="modifyForm.get(['passwords', 'pass']).invalid">Invalid format</mat-error>
         </mat-form-field>
         <div class="passHelp"></div>
 
         <mat-form-field appearance="outline">
-            <mat-label>Re-enter Password</mat-label>
-            <input matInput [type]="hideReenter ? 'password' : 'text'" name="reenter" formControlName="reenter" required>
-            <mat-error *ngIf="signupForm.get(['passwords', 'reenter']).invalid">Mismatched password</mat-error>
-            <button mat-icon-button matSuffix (click)="hideReenter = !hideReenter" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideReenter">
-                <mat-icon>{{hideReenter ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
+            <mat-label>Re-enter New Password</mat-label>
+            <input matInput type="password" name="reenter" formControlName="reenter">
+            <mat-error *ngIf="modifyForm.get(['passwords', 'reenter']).invalid">Mismatched password</mat-error>
         </mat-form-field>
-    </div>
+    </div>  
 
     <mat-form-field appearance="outline">
         <mat-label>Phone</mat-label>
         <input matInput type="text" name="phone" formControlName="phone">
         <mat-hint></mat-hint>
-        <mat-error *ngIf="signupForm.get('phone').invalid">Only numerals</mat-error>
+        <mat-error *ngIf="modifyForm.get('phone').invalid">Only numerals</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput type="email" name="email" formControlName="email" required>
         <mat-hint></mat-hint>
-        <mat-error *ngIf="signupForm.get('email').invalid">unlike lmn@pqr[.xyz]</mat-error>
+        <mat-error *ngIf="modifyForm.get('email').invalid">unlike lmn@pqr[.xyz]</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
         <mat-label>Date of Birth</mat-label>
-        <input matInput type="text" [max]="maxDate" formControlName="dob" [matDatepicker]="dobPicker" required>
+        <input matInput type="text" [max]="maxDate" formControlName="dob" [matDatepicker]="dobPicker" disabled>
         <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
         <mat-datepicker #dobPicker></mat-datepicker>
         <mat-error>Age limit 13</mat-error>
     </mat-form-field>
 
-    <mat-radio-group name="sex" formControlName="sex">
+    <mat-radio-group name="sex" formControlName="sex" style="margin-bottom: 1%; margin-left: 1%;">
         <label for="sex" id="sexLabel"><span class="mat-subheading-2">Sex</span></label>
         <mat-radio-button value="m">Male</mat-radio-button>
         <mat-radio-button value="f">Female</mat-radio-button>
@@ -68,7 +59,7 @@
         <mat-label>Business Name</mat-label>
         <input matInput type="text" name="busName" formControlName="busName" required>
         <mat-hint></mat-hint>
-        <mat-error *ngIf="signupForm.get('busName').invalid">Name required</mat-error>
+        <mat-error *ngIf="modifyForm.get('busName').invalid">Name required</mat-error>
     </mat-form-field>
 
     <div formGroupName="address">
@@ -77,42 +68,42 @@
             <mat-label>Shop</mat-label>
             <input matInput type="text" name="shop" formControlName="shop" required>
             <mat-hint></mat-hint>
-            <mat-error *ngIf="signupForm.get(['address', 'shop']).invalid">House required</mat-error>
+            <mat-error *ngIf="modifyForm.get(['address', 'shop']).invalid">House required</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Area</mat-label>
             <input matInput type="text" name="area" formControlName="area" required>
             <mat-hint></mat-hint>
-            <mat-error *ngIf="signupForm.get(['address', 'area']).invalid">Area required</mat-error>
+            <mat-error *ngIf="modifyForm.get(['address', 'area']).invalid">Area required</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Landmark</mat-label>
             <input matInput type="text" name="landmark" formControlName="landmark" required>
             <mat-hint></mat-hint>
-            <mat-error *ngIf="signupForm.get(['address', 'landmark']).invalid"></mat-error>
+            <mat-error *ngIf="modifyForm.get(['address', 'landmark']).invalid"></mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>City</mat-label>
             <input matInput type="text" name="city" formControlName="city" required>
             <mat-hint></mat-hint>
-            <mat-error *ngIf="signupForm.get(['address', 'city']).invalid">City required</mat-error>
+            <mat-error *ngIf="modifyForm.get(['address', 'city']).invalid">City required</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>State</mat-label>
             <input matInput type="text" name="state" formControlName="state" required>
             <mat-hint></mat-hint>
-            <mat-error *ngIf="signupForm.get(['address', 'state']).invalid">State required</mat-error>
+            <mat-error *ngIf="modifyForm.get(['address', 'state']).invalid">State required</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Pin</mat-label>
             <input matInput type="text" name="pin" formControlName="pin" required>
             <mat-hint></mat-hint>
-            <mat-error *ngIf="signupForm.get(['address', 'pin']).invalid">unlike 6 digit number</mat-error>
+            <mat-error *ngIf="modifyForm.get(['address', 'pin']).invalid">unlike 6 digit number</mat-error>
         </mat-form-field>
     </div>
 
@@ -120,28 +111,27 @@
         <mat-label>GSTIN</mat-label>
         <input matInput type="text" name="gstin" formControlName="gstin" required>
         <mat-hint></mat-hint>
-        <mat-error *ngIf="signupForm.get('gstin').invalid">unlike 12ABCDE3456F7G8</mat-error>
+        <mat-error *ngIf="modifyForm.get('gstin').invalid">unlike 12ABCDE3456F7G8</mat-error>
     </mat-form-field>
 
-    <button mat-flat-button color="accent" value="submit" [disabled]="!signupForm.valid">Submit</button>
+    <button mat-flat-button color="accent" value="submit" [disabled]="!modifyForm.valid">Modify</button>
 </form>
 
 </div>
 
+<!-- <p>Form Value: {{ modifyForm.value | json }}</p>
+<p>Form Status: {{ modifyForm.status }}</p>
 
-<!-- <p>Form Value: {{ signupForm.value | json }}</p>
-<p>Form Status: {{ signupForm.status }}</p>
-
-<p>{{ signupForm.get('fullName').invalid }}</p>
-<p>{{ signupForm.get(['passwords', 'pass']).invalid }}</p>
-<p>{{ signupForm.get(['passwords', 'reenter']).invalid }}</p>
-<p>{{ signupForm.get('phone').invalid }}</p>
-<p>{{ signupForm.get('dob').invalid }}</p>
-<p>{{ signupForm.get('email').invalid }}</p>
-<p>{{ signupForm.get('sex').invalid }}</p>
-<p>{{ signupForm.get(['address', 'house']).invalid }}</p>
-<p>{{ signupForm.get(['address', 'area']).invalid }}</p>
-<p>{{ signupForm.get(['address', 'landmark']).invalid }}</p>
-<p>{{ signupForm.get(['address', 'city']).invalid }}</p>
-<p>{{ signupForm.get(['address', 'state']).invalid }}</p>
-<p>{{ signupForm.get(['address', 'pin']).invalid }}</p> -->
+<p>{{ modifyForm.get('fullName').invalid }}</p>
+<p>{{ modifyForm.get(['passwords', 'pass']).invalid }}</p>
+<p>{{ modifyForm.get(['passwords', 'reenter']).invalid }}</p>
+<p>{{ modifyForm.get('phone').invalid }}</p>
+<p>{{ modifyForm.get('dob').invalid }}</p>
+<p>{{ modifyForm.get('email').invalid }}</p>
+<p>{{ modifyForm.get('sex').invalid }}</p>
+<p>{{ modifyForm.get(['address', 'house']).invalid }}</p>
+<p>{{ modifyForm.get(['address', 'area']).invalid }}</p>
+<p>{{ modifyForm.get(['address', 'landmark']).invalid }}</p>
+<p>{{ modifyForm.get(['address', 'city']).invalid }}</p>
+<p>{{ modifyForm.get(['address', 'state']).invalid }}</p>
+<p>{{ modifyForm.get(['address', 'pin']).invalid }}</p> -->

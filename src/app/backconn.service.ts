@@ -4,64 +4,79 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs'
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class BackconnService {
 
-  readonly rootUrl = 'http://localhost:3000/api';
+	readonly rootUrl = 'http://localhost:3000/api';
 
-  temp: any;
+	temp: any;
 
-  constructor(
-    private http: HttpClient,
-  ) { }
+	constructor(
+		private http: HttpClient,
+	) { }
 
-  headers: HttpHeaders;
+	headers: HttpHeaders;
 
-  genHeaders(): void {
-    this.headers = new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    });
-  }
+	genHeaders(): void {
+		this.headers = new HttpHeaders({
+			'Content-Type':	'application/json',
+			'Authorization': `Bearer ${localStorage.getItem('token')}`
+		});
+	}
 
-  signup(reqBody: string): Observable<any> {
-    this.genHeaders();
-    return this.http.post(this.rootUrl + '/signup', reqBody, {headers: this.headers});
-  }
+	signup(reqBody: string): Observable<any> {
+		this.genHeaders();
+		return this.http.post(this.rootUrl + '/signup', reqBody, {headers: this.headers});
+	}
 
-  login(reqBody: string): Observable<any> {
-    this.genHeaders();
-    return this.http.post(this.rootUrl + '/login', reqBody, {headers: this.headers});
-  }
+	login(reqBody: string): Observable<any> {
+		this.genHeaders();
+		return this.http.post(this.rootUrl + '/login', reqBody, {headers: this.headers});
+	}
 
-  sellerSignup(reqBody: string): Observable<any> {
-    this.genHeaders();
-    return this.http.post(this.rootUrl + '/seller/signup', reqBody, {headers: this.headers});
-  }
+	sellerSignup(reqBody: string): Observable<any> {
+		this.genHeaders();
+		return this.http.post(this.rootUrl + '/seller/signup', reqBody, {headers: this.headers});
+	}
 
-  sellersLogin(reqBody: string): Observable<any> {
-    this.genHeaders();
-    return this.http.post(this.rootUrl + '/seller/login', reqBody, {headers: this.headers});
-  }
+	sellersLogin(reqBody: string): Observable<any> {
+		this.genHeaders();
+		return this.http.post(this.rootUrl + '/seller/login', reqBody, {headers: this.headers});
+	}
 
-  fetchCategories(): Observable<any> {
-    this.genHeaders();
-    return this.http.get(this.rootUrl + '/categories');
-  }
+	fetchCategories(): Observable<any> {
+		this.genHeaders();
+		return this.http.get(this.rootUrl + '/categories');
+	}
 
-  productCreate(reqBody: string): Observable<any> {
-    this.genHeaders();
-    return this.http.post(this.rootUrl + '/seller/create', reqBody, {headers: this.headers});
-  }
+	productCreate(reqBody: string): Observable<any> {
+		this.genHeaders();
+		return this.http.post(this.rootUrl + '/seller/create', reqBody, {headers: this.headers});
+	}
 
-  productFetch(reqBody: string): Observable<any> {
-    this.genHeaders();
-    return this.http.post(this.rootUrl + '/seller/products', reqBody, {headers: this.headers});
-  }
+	productFetch(reqBody: string): Observable<any> {
+		this.genHeaders();
+		return this.http.post(this.rootUrl + '/seller/products', reqBody, {headers: this.headers});
+	}
 
-  changeStock(reqBody: string): Observable<any> {
-    this.genHeaders();
-    return this.http.post(this.rootUrl + '/seller/stock', reqBody, {headers: this.headers});
-  }
+	changeStock(reqBody: string): Observable<any> {
+		this.genHeaders();
+		return this.http.post(this.rootUrl + '/seller/stock', reqBody, {headers: this.headers});
+	}
+
+	productModify(reqBody: string): Observable<any> {
+		this.genHeaders();
+		return this.http.post(this.rootUrl + '/seller/modify', reqBody, {headers: this.headers});
+	}
+
+	fetchSellersProfile(): Observable<any> {
+		this.genHeaders();
+		return this.http.get(this.rootUrl + '/seller/select', {headers: this.headers});
+	}
+
+	modifySellersProfile(reqBody: string): Observable<any> {
+		this.genHeaders();
+		return this.http.post(this.rootUrl + '/seller/update', reqBody, {headers: this.headers});
+	}
 }

@@ -22,6 +22,7 @@ import { SellerDashboardComponent } from './seller/seller-dashboard/seller-dashb
 import { ProductCreateComponent } from './seller/product-create/product-create.component';
 import { ProductViewComponent } from './seller/product-view/product-view.component';
 import { ProductEditComponent } from './seller/product-edit/product-edit.component';
+import { SellerSettingsComponent } from './seller/seller-settings/seller-settings.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ProductEditComponent } from './seller/product-edit/product-edit.compone
     SellerDashboardComponent,
     ProductCreateComponent,
     ProductViewComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    SellerSettingsComponent
   ],
   imports: [
     BrowserModule,

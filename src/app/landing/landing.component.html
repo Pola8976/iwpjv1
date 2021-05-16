@@ -1,3 +1,46 @@
-<div><a mat-flat-button color="primary" class="button" routerLink="/seller">
+<div class="main-container">
+<a mat-flat-button color="primary" class="button" routerLink="/seller">
     Sellers
-</a></div>
+</a>
+<div class="main">
+    <div class="information">
+        <div class="overlay"></div>
+        <img src="../../assets/landing-images/logo-main.jpeg" class="prima">
+        <div id="circle">
+            <div class="feature one">
+                <img src="../../assets/landing-images/logo-godrej.png">
+                <div>
+                    <h3>Furniture</h3>
+                    <p>Wide range of furniture collection<br> from top brands</p>
+                </div>
+            </div>
+            <div class="feature two">
+                <img src="../../assets/landing-images/logo-philips.png">
+                <div>
+                    <h3>Electronics</h3>
+                    <p>Innovation and technology partner</p>
+                </div>
+            </div>
+            <div class="feature three">
+                <img src="../../assets/landing-images/logo-oppo.png">
+                <div>
+                    <h3>Mobile and Accessories</h3>
+                    <p>Internationally accredited smartphone<br>companies. Includes giants like<br> Samsung, Apple</p>
+                </div>
+            </div>
+            <div class="feature four">
+                <img src="../../assets/landing-images/hewlett-packard-logo-black-and-white.png">
+                <div>
+                    <h3>Laptops and Monitors</h3>
+                    <p>From Gaming to Coding,<br> we've got you covered</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="controls">
+        <img src="../../assets/landing-images/arrow.png" (click)="shift(true)" id="upBtn">
+        <h3>Products</h3>
+        <img src="../../assets/landing-images/arrow.png" (click)="shift(false)" id="downBtn">
+    </div>
+    </div>
+</div>

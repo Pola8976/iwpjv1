@@ -2,16 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackconnService } from 'src/app/backconn.service';
 import { FormControl } from '@angular/forms'
-
-export interface ProductDetails {
-  id: number;
-  prodName: string;
-  catName: string;
-  price: number;
-  stock: number;
-  sold: number;
-  description: string;
-}
+import { Product } from 'src/app/product';
 
 @Component({
   selector: 'app-product-view',
@@ -20,7 +11,7 @@ export interface ProductDetails {
 })
 export class ProductViewComponent implements OnInit {
 
-  product: ProductDetails;
+  product: Product;
   stockChange = new FormControl('');
 
   constructor(
@@ -37,6 +28,10 @@ export class ProductViewComponent implements OnInit {
       if(reply.result == "success")
         this.product.stock = newStock;
     });
+  }
+
+  goToEdit(): void {
+    this.router.navigate(['seller/edit', this.product.id]);
   }
 
   ngOnInit(): void {

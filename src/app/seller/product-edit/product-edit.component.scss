@@ -1,0 +1,14 @@
+$formEleWidth: 60%;
+
+form > span.actionButtons {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: auto;
+    width: $formEleWidth;
+}
+
+span.actionButtons > * {
+    margin-right: 1%;
+    width: 100%;
+}

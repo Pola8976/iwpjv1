@@ -20,7 +20,7 @@ export class TopBarComponent implements OnInit {
   ) { }
 
   isLoggedIn(): string | null {
-    return localStorage.getItem('token') ? localStorage.getItem('name') : null;
+    return localStorage.getItem('token') ? (localStorage.getItem('name') + '\t') : null;
   }
 
   logout(): void {
