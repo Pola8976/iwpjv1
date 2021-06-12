@@ -37,7 +37,7 @@ export class ProductCreateComponent implements OnInit {
       if(reply.result == "success") {
         this.productCreationForm.reset();
         this.snackBar.serveSnackBar("Product created! 🎉🎊");
-        // this.router.navigate(['seller/view']);
+        this.router.navigate(['seller/dash']);
       }
       else {
         this.snackBar.serveSnackBar("Server error");
